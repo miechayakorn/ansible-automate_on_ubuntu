@@ -9,6 +9,9 @@
 
 # =============== Prepare necessary packages =============== # 
 
+   - name: Install aptitude using apt
+     apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
+
    - name: Install Necessary Packages
      apt: name={{ item }} update_cache=yes state=latest
      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common' ]
