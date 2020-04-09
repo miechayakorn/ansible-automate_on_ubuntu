@@ -24,10 +24,7 @@
       state: present
 
    - name: 
-     #shell: "add-apt-repository \ 'deb [arch=amd64] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) \ stable'"
-     apt_repository:
-      repo: deb https://download.docker.com/linux/ubuntu
-      state: present
+     shell: "add-apt-repository \ 'deb [arch=amd64] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) \ stable'"
 
    - name: Run "apt-get update"
      apt:
