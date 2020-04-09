@@ -9,9 +9,6 @@
 
 # =============== Prepare necessary packages =============== # 
 
-   - name: Use apt_get
-     apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
-
    - name: Install Necessary Packages
      apt: name={{ item }} update_cache=yes state=latest
      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common' ]
@@ -24,7 +21,10 @@
       state: present
 
    - name: 
-     shell: "add-apt-repository \ 'deb [arch=amd64] https://download.docker.com/linux/ubuntu \ $(lsb_release -cs) \ stable'"
+     shell: "add-apt-repository \
+   'deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable'"
 
    - name: Run "apt-get update"
      apt:
