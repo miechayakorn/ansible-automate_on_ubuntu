@@ -37,7 +37,7 @@
      loop: [ 'docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose' ]
 
    - name: add docker to user group
-     command: sudo usermod -aG docker {{ remote_user }}
+     shell: "usermod -aG docker {{ ansible_user }}"
      
    - name: enable Docker
      systemd:
