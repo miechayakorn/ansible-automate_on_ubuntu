@@ -64,6 +64,6 @@
       enabled: yes
      when: gitlab_install
      
-   - name: add docker to user group
+   - name: add docker to gitlab-runner and restart docker
      shell: "usermod -aG docker gitlab-runner && service docker restart"
      when: gitlab_install
