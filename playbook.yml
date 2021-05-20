@@ -53,8 +53,8 @@
      when: gitlab_install
      
    - name: Install gitlab_runner
-     apt: deb="/etc/gitlab-runner_amd64.deb"
-     sudo: true
+     apt:
+      deb: "/etc/gitlab-runner_amd64.deb"
      when: gitlab_install
      
    - name: enable gitlab_runner
