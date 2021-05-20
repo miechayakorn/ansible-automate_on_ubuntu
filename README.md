@@ -1,5 +1,5 @@
-# Docker-compose automate install on ubuntu by ansible 
-### Don't forget to change IP or Nameserver at inventory/hosts
+# Docker-compose and gitlab-runner automate install on ubuntu by ansible 
+### Don't forget to change IP or Nameserver at 🚀 inventory/hosts
  - xxx.xxx.xxx.xxx
 ### Run script
 ``` 
