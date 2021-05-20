@@ -6,3 +6,13 @@
 ansible-playbook playbook.yml -k -K 
 ```
 
+#### 🦽 Install Ansible
+```
+sudo apt update
+```
+```
+sudo apt install ansible
+```
+```
+sudo apt-get install sshpass
+```
