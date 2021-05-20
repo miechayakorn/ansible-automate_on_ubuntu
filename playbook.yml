@@ -2,6 +2,8 @@
 - hosts: server
   gather_facts: false
   become: true
+  vars:
+    gitlab_install: false
   tasks:
 
 # =============== Prepare necessary packages =============== # 
@@ -31,7 +33,7 @@
 
    - name: Install Docker Packages
      apt: name={{ item }} update_cache=yes state=latest
-     loop: [ 'docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose' ]
+     loop: [ 'docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose', 'gnupg2', 'pass' ]
 
    - name: add docker to user group
      shell: "usermod -aG docker {{ ansible_user }}"
@@ -41,3 +43,27 @@
       name: docker
       state: started
       enabled: yes
+      
+# =============== Install Gitlab-runner =============== #
+
+   - name: Download gitlab_runner
+     get_url: 
+       url="https://gitlab-runner-downloads.s3.amazonaws.com/latest/deb/gitlab-runner_amd64.deb"
+       dest="/etc/gitlab-runner_amd64.deb"
+     when: gitlab_install
+     
+   - name: Install gitlab_runner
+     apt: deb="/etc/gitlab-runner_amd64.deb"
+     sudo: true
+     when: gitlab_install
+     
+   - name: enable gitlab_runner
+     systemd:
+      name: gitlab-runner
+      state: started
+      enabled: yes
+     when: gitlab_install
+     
+   - name: add docker to user group
+     shell: "usermod -aG docker gitlab-runner && service docker restart"
+     when: gitlab_install
